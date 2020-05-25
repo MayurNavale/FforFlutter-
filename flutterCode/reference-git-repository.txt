@@ -1,0 +1,12 @@
+$ git push
+fatal: The current branch secondBranch has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin secondBranch
+
+
+https://github.com/smartherd/DartTutorial
+
+flutter widget crteativel.. done
+https://www.youtube.com/watch?v=75CsnyRXf5I&list=PLjxrf2q8roU23XGwz3Km7sQZFTdB996iG&index=59
+https://www.youtube.com/playlist?list=PLjxrf2q8roU2HdJQDjJzOeO6J3FoFLWr2

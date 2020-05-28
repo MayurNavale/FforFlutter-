@@ -7,6 +7,8 @@ To push the current branch and set the remote as upstream, use
 
 https://github.com/smartherd/DartTutorial
 
-flutter widget crteativel.. done
-https://www.youtube.com/watch?v=75CsnyRXf5I&list=PLjxrf2q8roU23XGwz3Km7sQZFTdB996iG&index=59
-https://www.youtube.com/playlist?list=PLjxrf2q8roU2HdJQDjJzOeO6J3FoFLWr2
+flutter widget crteativel.. done ->
+                     :      https://www.youtube.com/watch?v=75CsnyRXf5I&list=PLjxrf2q8roU23XGwz3Km7sQZFTdB996iG&index=59
+flutter material     :      https://api.flutter.dev/flutter/material/material-library.html
+fllutter  layout     :      https://flutter.dev/docs/development/ui/layout
+flutter App example  :      https://flutter.dev/docs/codelabs

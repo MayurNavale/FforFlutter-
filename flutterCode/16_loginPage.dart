@@ -72,7 +72,9 @@ class _SignUpFormState extends State<SignUpForm>{
                     ),
   //color:Colors.blue,
   elevation: 9,
-  onPressed:null,
+  onPressed:(){
+    _navigatortosecondpage(context);
+        },
     
 
          ),
@@ -80,8 +82,37 @@ class _SignUpFormState extends State<SignUpForm>{
      ),
     );
   }
+  void _navigatortosecondpage(BuildContext context){
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder:(context)=>SecondScreen(),
+    )
+    );
+  }
 }
 
+ class SecondScreen extends StatelessWidget{
+  Widget build(BuildContext context){
+    return Scaffold(
+        appBar:AppBar(
+        title:Text('page2'),
+          ),
+        body:Center(
+        child:RaisedButton(
+        child:Text('press here to go back'),
+          onPressed:(){
+            _navigatortohomepage(context);
+          },
+      ),
+    ),
+      );
+  }
+    void  _navigatortohomepage(BuildContext context){
+      Navigator.pop(context);
+    }
+ 
+  }
 
    
-        
+    

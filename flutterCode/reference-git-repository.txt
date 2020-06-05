@@ -12,3 +12,14 @@ flutter widget crteativel.. done ->
 flutter material     :      https://api.flutter.dev/flutter/material/material-library.html
 fllutter  layout     :      https://flutter.dev/docs/development/ui/layout
 flutter App example  :      https://flutter.dev/docs/codelabs
+
+
+widget example to run :https://github.com/flutter/flutter/tree/b041144f833e05cf463b8887fa12efdec9493488/packages/flutter/lib/src/widgets
+:    https://github.com/flutter/flutter/tree/b041144f833e05cf463b8887fa12efdec9493488
+
+static Future saveImage(Uint8List imageBytes) async {
+  assert(imageBytes != null);
+  final result =
+  await _channel.invokeMethod('saveImageToGallery', imageBytes);
+  return result;
+}

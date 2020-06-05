@@ -23,3 +23,5 @@ static Future saveImage(Uint8List imageBytes) async {
   await _channel.invokeMethod('saveImageToGallery', imageBytes);
   return result;
 }
+https://pub.dev/packages/share#-example-tab-
+https://github.com/flutter/plugins/tree/master/packages

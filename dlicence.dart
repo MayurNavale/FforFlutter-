@@ -55,11 +55,11 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Color c1 = const Color(0xCFCFCF);
-  String dropdownValue;
+  String state_of_issue;
   String licence_Code;
   String title_fo_licence;
-  String licence_Number;
-  String issued_by;
+  String licence_Number="";
+  String country_code;
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +75,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       icon: Icon(IconData(58131, fontFamily: 'MaterialIcons')),
       iconSize: 24,
       elevation: 16,
+  
       style: TextStyle(color: Colors.deepPurple),
       underline: Container(
         height: 2,
@@ -82,7 +83,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ),
       onChanged: (String newValue) {
         setState(() {
-          dropdownValue = newValue;
+          state_of_issue = newValue;
         });
       },
       items: <String>['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Congo, Democratic Republic', 'Costa Rica', 'Cote d\'Ivoire', 'Croatia', 'Cuba', 'Cyprus', 'Czechia', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini (formerly Swaziland)', 'Ethiopia', 'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Korea', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Korea', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States of America', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe', ]
@@ -92,13 +93,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           child: Text(value),
         );
       }).toList(),
+            value:state_of_issue,
     )
         ),
          ListTile(
           leading: Text('LicenceCode  :'),
           title:  DropdownButton<String>(
-        hint :Text('licence code'),
-      icon: Icon(IconData(58131, fontFamily: 'MaterialIcons')),
+            hint:Text('licence code'),
+         icon: Icon(IconData(58131, fontFamily: 'MaterialIcons')),
       iconSize: 24,
       elevation: 16,
       style: TextStyle(color: Colors.deepPurple),
@@ -127,11 +129,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         hintText: 'Licence number:'
       ),
     
-            onChanged: (String newValue) {
+            onSubmitted: (String newValue) {
         setState(() {
           licence_Number = newValue;
         });
       },
+           
 )
         ),
          ListTile(
@@ -147,9 +150,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         color: Colors.deepPurpleAccent,
       ),
       onChanged: (String newValue) {
+       
         setState(() {
           title_fo_licence = newValue;
+          
         });
+       
       },
       items: <String>[  'LAPL(A)','LAPL(H)','LAPL(S)','LAPL(B)','PPL(A)','PPL(H)','PPL(As)',
                       'SPL','BPL','CPL(A)','CPL(H)','CPL(As)','MPL','ATPL(A)','ATPL(H)']
@@ -159,6 +165,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           child: Text(value),
         );
       }).toList(),
+              value:title_fo_licence,
     ),
            ),
          ListTile(
@@ -175,7 +182,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ),
       onChanged: (String newValue) {
         setState(() {
-          issued_by  = newValue;
+          country_code  = newValue;
         });
       },
       items: <String>['AD','AE','AF','AG','AI','AL','AM','AO','AQ',
@@ -212,9 +219,40 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           child: Text(value),
         );
       }).toList(),
+             value:country_code,
     ),
-           ),
+),
+       ListTile(
+          leading: Text('Title of licence  :'),
+          title:  DropdownButton<String>(
+      hint :Text('Title'),
+      icon: Icon(IconData(0xe935, fontFamily: 'MaterialIcons')),
+      iconSize: 24,
+      elevation: 16,
+      style: TextStyle(color: Colors.deepPurple),
+      underline: Container(
+        height: 2,
+        color: Colors.deepPurpleAccent,
+      ),
+      onChanged: (String newValue) {
        
+        setState(() {
+          title_fo_licence = newValue;
+          
+        });
+       
+      },
+      items: <String>[  'LAPL(A)','LAPL(H)','LAPL(S)','LAPL(B)','PPL(A)','PPL(H)','PPL(As)',
+                      'SPL','BPL','CPL(A)','CPL(H)','CPL(As)','MPL','ATPL(A)','ATPL(H)']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+              value:title_fo_licence,
+    ),
+           ), 
 
       ],
     ),

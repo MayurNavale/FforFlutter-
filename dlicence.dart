@@ -46,6 +46,7 @@ class FifthRoute extends StatelessWidget {
     );
   }
 }
+
 class MyStatefulWidget extends StatefulWidget {
   MyStatefulWidget({Key key}) : super(key: key);
 
@@ -55,6 +56,8 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Color c1 = const Color(0xCFCFCF);
+  var dateOfInitialIssue='date';
+  var dateofIRtest='date';
  String state_of_issue;
   String licence_Code;
   String title_fo_licence;
@@ -63,8 +66,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 String examiners_certificate_number;
   String _class;
   String tpyeOptionData;
-  bool _ir=false;
+  bool ir=false;
   bool co_Pilot=false;
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -173,6 +177,49 @@ String examiners_certificate_number;
               value:title_fo_licence,
     ),
            ),
+        ListTile(
+          leading : Text('Date of initial issue : '),
+          title:Container(
+         child: Row(
+           children:[
+     
+      Expanded(
+      
+      child:Text('$dateOfInitialIssue')
+             
+            ),
+            IconButton(
+        
+            icon: Icon(IconData(59701, fontFamily: 'MaterialIcons')),
+            color: Colors.deepPurple,
+            onPressed: () {showAlertDialog(context);  },
+          ),
+            ],),),
+         
+     
+        ),  ListTile(
+          leading : Text('Date of IR test : '),
+          title:Container(
+         child: Row(
+           children:[
+     
+      Expanded(
+      
+      child:Text('$dateofIRtest')
+             
+            ),
+            IconButton(
+        
+            icon: Icon(IconData(59701, fontFamily: 'MaterialIcons')),
+            color: Colors.deepPurple,
+            onPressed: () {showAlertDialog(context);  },
+          ),
+            ],),),
+         
+     
+        ),
+        
+
          ListTile(
           leading: Text('Issued by :   '),
           title:  DropdownButton<String>(
@@ -341,12 +388,12 @@ String examiners_certificate_number;
           leading: Checkbox(
              //checkColor :Colors.deepPurpleAccent,
             hoverColor :Colors.deepPurpleAccent,
-  value: _ir,
+  value: co_Pilot,
   onChanged: (bool newValue) {
     setState(() {
-      _ir = newValue;
+      ir = newValue;
     }); },), title:Text('IR'),
-            ),
+            )
              ),
             ),
             Expanded(
@@ -364,6 +411,7 @@ String examiners_certificate_number;
     }); },), title:Text('Co_Pilot'),
             ),
      ) ),],),),
+        
        Text(' Additional Ratings'),
           
       ],
@@ -373,7 +421,32 @@ String examiners_certificate_number;
   }
 }
       
-             
-      
-      
+showAlertDialog(BuildContext context) {  
+  // Create button  
+  Widget okButton = FlatButton(  
+    child: Text("OK"),  
+    onPressed: () {  
+      Navigator.of(context).pop();  
+    },  
+  );  
   
+  // Create AlertDialog  
+  AlertDialog alert = AlertDialog(  
+    title: Text("select date"),  
+    content:null,
+  
+    actions: [
+       
+  
+      okButton,  
+    ],  
+  );  
+  
+  // show the dialog  
+  showDialog(  
+    context: context,  
+    builder: (BuildContext context) {  
+      return alert;  
+    },  
+  );  
+}   

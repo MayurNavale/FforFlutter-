@@ -27,7 +27,7 @@ class MyHomePage extends StatefulWidget {
 var dateofratingtest;
   String licence_Number;
   String countryCodes;
-String examinerscertificatenumber;
+//ring examinerscertificatenumber;
   String _class;
   String tpyeOptionData;
   bool ir=false;
@@ -36,7 +36,9 @@ String  licenceNumber;
 String typeclass;
 var additionalLicenceNumber;
 var validuntil;
-var _examinerscertificatenumber;
+var examinerscertificatenumber;
+var instructorsOptions;
+var remarksandRestrictions;
 
 class MyItem {
   MyItem({this.isExpanded: false, this.header,this.ir,this.co_Pilot });
@@ -50,6 +52,9 @@ class MyItem {
 class _MyHomePage extends State<MyHomePage> {
   List<MyItem> _items = <MyItem>[
     new MyItem(header: ' Additional Ratings')
+  ];
+ List<MyItem> _insts = <MyItem>[
+    new MyItem(header: ' Instructors')
   ];
 
   @override
@@ -69,7 +74,6 @@ class _MyHomePage extends State<MyHomePage> {
         Container(child:_examinerscertificatenumber(),),
          Container(child:classOptions(),),Container(child:_tpyeOptionData(),),
         Container(child:irCoPilot(),),
-        
         ExpansionPanelList(
           expansionCallback: (int index, bool isExpanded) {
             setState(() {
@@ -100,8 +104,44 @@ alignment : Alignment.centerLeft,
                       child: irCoPilot(),
                     ),
                      Expanded(
-                      child: additionalLicenceNumberdata(),
+                      child: _remarksandRestrictions(),
                     ),
+                  ],
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+        ExpansionPanelList(
+          expansionCallback: (int index, bool isExpanded) {
+            setState(() {
+              _insts[index].isExpanded = !_insts[index].isExpanded;
+            });
+          },
+          children: _insts.map((MyItem item) {
+            return new ExpansionPanel(
+              headerBuilder: (BuildContext context, bool isExpanded) {
+                return new Container(
+margin :EdgeInsets.all(10),
+padding :EdgeInsets.all(10),
+alignment : Alignment.centerLeft,
+                  child:Text(item.header),);
+              },
+              isExpanded: item.isExpanded,
+              body: Container(
+                height: 200.0,
+                decoration: new BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child:_instructorsOptions(),
+                    ),
+                    Expanded(
+                      child: _remarksandRestrictions(),
+                    ),
+                     
                   ],
                 ),
               ),
@@ -206,6 +246,24 @@ Widget additionalLicenceNumberdata() {
 )
         );
   }
+  Widget _remarksandRestrictions() {
+    return ListTile(autofocus: true,
+          leading: Text('Remarks and Restrictions :'),
+          title: TextField(
+      decoration: InputDecoration(
+        hintText: 'Licence number:'
+      ),
+    
+            onSubmitted: (String newValue) {
+        setState(() {
+          remarksandRestrictions = newValue;
+        });
+      },
+           
+)
+        );
+  }
+  
   
   Widget _contries( ) {
     return  ListTile(
@@ -391,7 +449,7 @@ return ListTile(
      
         );}Widget _dateofIRtest(){
 return ListTile(
-          leading : Text('Date of ir Test : '),
+          leading : Text('Date of IR Test : '),
           title:Container(
          child: Row(
            children:[
@@ -487,25 +545,7 @@ return ListTile(
              value:countryCodes,
     ),
 );}
-  Widget _examiners_certificate_number(){
-  return ListTile(
-         leading: Text('certificate number '),
-          title: TextField(
-      decoration: InputDecoration(
-        hintText: 'Examiners certificate number',
-      ),
-    
-            onSubmitted: (String newValue) {
-        setState(() {
-          examinerscertificatenumber = newValue;
-        });
-      },
-           
-)
-         
-        
-         );
-  }
+  
   Widget _tpyeOptionData(){
     return ListTile(
           leading: Text('Type'),
@@ -522,7 +562,8 @@ return ListTile(
        setState(() {
           tpyeOptionData = newValue;
         });
-    },items: <String>[ 'TMG', 'SET', 'S760', 'SN601', 'SE210/10B3/11/12', 'ND25', 'ND16', 'ND26',
+    },
+           items: <String>[ 'TMG', 'SET', 'S760', 'SN601', 'SE210/10B3/11/12', 'ND25', 'ND16', 'ND26',
  'SuperGuppy', 'Aero Vodochody SET', 'A300', 'A300FFCC', 'A310/300‐600', 
 'A300‐600ST', 'A320', 'A330/350', 'A340', 'A380', 'A400M', 'AT‐4/5/6/8 SET',
  'C27J', 'AN26', 'AstaMET', 'ATR42/72', 'HS748', 'Jetstream 41', 'RA390',
@@ -565,6 +606,59 @@ return ListTile(
         );}).toList(),
               value:tpyeOptionData, ),
         );}
+   Widget _instructorsOptions() {
+    return ListTile(
+    
+      leading: Text('Instructors :'),
+      title: DropdownButton<String>(
+        hint: Text('Type'),
+        icon: Icon(IconData(58131, fontFamily: 'MaterialIcons')),
+        iconSize: 24,
+        elevation: 16,
+        style: TextStyle(color: Colors.deepPurple),
+        underline: Container(
+          height: 2,
+          color: Colors.deepPurpleAccent,
+        ),
+        onChanged: (String newValue) {
+          setState(() {
+            instructorsOptions = newValue;
+          });
+        },
+        items: <String>[
+          'FI(A)',
+    'FI(H)',
+    'FI(As)',
+    'FI(S)',
+    'FI(B)',
+    'TRI(A)',
+    'TRI(H)',
+    'TRI(PL)',
+    'CRI(A)',
+    'IRI(A)',
+    'IRI(H)','IRI(As)',
+    'SFI(A)',
+    'SFI(H)',
+    'SFI(PL)',
+    'MCCI(A)',
+    'MCCI(H)',
+    'MCCI(PL)',
+    'MCCI(As)',
+    'STI(A)',
+    'STI(H)',
+    'MI',
+    'FTI',
+        ].map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        value: instructorsOptions,
+      ),
+    );
+  }
+  
 }
       
 showAlertDialog(BuildContext context) {  

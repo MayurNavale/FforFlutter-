@@ -39,7 +39,9 @@ var validuntil;
 var examinerscertificatenumber;
 var instructorsOptions;
 var remarksandRestrictions;
-
+String examinarRemarksandRestrictions;
+var examiners;
+String ratingcertificateendorsement;
 class MyItem {
   MyItem({this.isExpanded: false, this.header,this.ir,this.co_Pilot });
 
@@ -56,7 +58,12 @@ class _MyHomePage extends State<MyHomePage> {
  List<MyItem> _insts = <MyItem>[
     new MyItem(header: ' Instructors')
   ];
-
+   List<MyItem> _examiner = <MyItem>[
+    new MyItem(header: ' Examiners')
+  ];
+  List<MyItem> _rating = <MyItem>[
+    new MyItem(header: ' Rating certificate endorsement')
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,7 +136,7 @@ alignment : Alignment.centerLeft,
               },
               isExpanded: item.isExpanded,
               body: Container(
-                height: 200.0,
+                height: 100.0,
                 decoration: new BoxDecoration(
                   color: Colors.white,
                 ),
@@ -147,9 +154,95 @@ alignment : Alignment.centerLeft,
               ),
             );
           }).toList(),
+        ), ExpansionPanelList(
+          expansionCallback: (int index, bool isExpanded) {
+            setState(() {
+              _examiner[index].isExpanded =!_examiner[index].isExpanded;
+            });
+          },
+          children: _examiner.map((MyItem item) {
+            return new ExpansionPanel(
+              headerBuilder: (BuildContext context, bool isExpanded) {
+                return new Container(
+margin :EdgeInsets.all(10),
+padding :EdgeInsets.all(10),
+alignment : Alignment.centerLeft,
+                  child:Text(item.header),);
+              },
+              isExpanded: item.isExpanded,
+              body: Container(
+                height: 100.0,
+                decoration: new BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: _examiners(),
+                    ),
+                    Expanded(
+                      child:_examinarRemarksandRestrictions(),
+                    ),
+                    
+                  ],
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+         ExpansionPanelList(
+          expansionCallback: (int index, bool isExpanded) {
+            setState(() {
+              _rating[index].isExpanded = !_rating[index].isExpanded;
+            });
+          },
+          children: _rating.map((MyItem item) {
+            return new ExpansionPanel(
+              headerBuilder: (BuildContext context, bool isExpanded) {
+                return new Container(
+margin :EdgeInsets.all(10),
+padding :EdgeInsets.all(10),
+alignment : Alignment.centerLeft,
+                  child:Text(item.header),);
+              },
+              isExpanded: item.isExpanded,
+              body: Container(
+                height:60.0,
+                decoration: new BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Column(
+                  children: [
+                    
+                    
+                    Expanded(
+                      child:_ratingcertificateendorsement(),
+                    ),
+                    
+                  ],
+                ),
+              ),
+            );
+          }).toList(),
         ),
       ],
    ), );
+  }
+    Widget _ratingcertificateendorsement() {
+    return ListTile(autofocus: true,
+        leading: Text('Rating :'),
+          title: TextField(
+      decoration: InputDecoration(
+        hintText: 'Rating certificate endorsementr:'
+      ),
+    
+            onSubmitted: (String newValue) {
+        setState(() {
+          ratingcertificateendorsement = newValue;
+        });
+       },
+      ),
+     );
   }
    Widget classOptions() {
     return ListTile(
@@ -228,7 +321,40 @@ alignment : Alignment.centerLeft,
      ) ),],),
     );
   }
-  
+   Widget _examiners() {
+    return ListTile(
+      trailing: Icon(Icons.delete),
+      leading: Text('Examiners'),
+      title: DropdownButton<String>(
+        hint: Text('Type'),
+        icon: Icon(IconData(58131, fontFamily: 'MaterialIcons')),
+        iconSize: 24,
+        elevation: 16,
+        style: TextStyle(color: Colors.deepPurple),
+        underline: Container(
+          height: 2,
+          color: Colors.deepPurpleAccent,
+        ),
+        onChanged: (String newValue) {
+          setState(() {
+            examiners = newValue;
+          });
+        },
+        items: <String>[
+          'SEP (land)',
+          'SEP (sea)',
+          'MEP (land)',
+          'MEP (sea)',
+        ].map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        value: examiners,
+      ),
+    );
+  }
 Widget additionalLicenceNumberdata() {
     return ListTile(autofocus: true,
           leading: Text('Licence number  :'),
@@ -334,7 +460,23 @@ Widget additionalLicenceNumberdata() {
            );
   }
 
-
+Widget _examinarRemarksandRestrictions() {
+    return ListTile(autofocus: true,
+        leading:Icon( IconData(59702, fontFamily: 'MaterialIcons')),
+          title: TextField(
+      decoration: InputDecoration(
+        hintText: 'Remarks and Restrictions:'
+      ),
+    
+            onSubmitted: (String newValue) {
+        setState(() {
+          examinarRemarksandRestrictions = newValue;
+        });
+      },
+           
+)
+        );
+  }
   Widget _licenceNumber() {
     return ListTile(autofocus: true,
           leading: Text('Licence number  :'),
@@ -690,3 +832,4 @@ showAlertDialog(BuildContext context) {
     },  
   );  
 }
+

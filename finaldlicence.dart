@@ -22,56 +22,57 @@ class SecondRoute extends StatelessWidget {
         title: Text("Selected option"),
       ),
       body: Container(
-         padding: new EdgeInsets.all(10.0),
-       
-          child: ListView(
-            children:[
-              Text('State of issue: $contries'),
-               Text('Licence code : $licenceCodeOptions'),
-               Text('Licence numbe:  $licence_Number'),
-               Text('Title of licence: $titleOfLicenceOptions'),
-               Text('Date of Initial Issue:  $dateOfInitialIssue'),
-               Text('Issued By(Countr code: $countryCodes'),
-               Text('Date of rating test:  $dateofratingtest'),
-               Text('Date of IR test:  $contries'),
-               Text('Valid until  :  $validuntil'),
-               Text('Examiners certificate number : $examinerscertificatenumber'),
-               Text('Class:$_class'),
-               Text('Type :$typeclass'),
-              Text('IR :$ir'),Text('Co-Pilot :$co_Pilot'),
-              Text('--------------------'),
-              Text('Additional Ratings'),
-              Text('Class :$addtiionalratingclassOptions'),
-              Text('Type:$additionalratingtpyeOptionData'),
-              Text('IR :$additionalratingIR'),
-              Text('Co-Pilot :$additionalratingcoPilot'),
-              Text('Remarks and Restrictions :$remarksandRestrictions'),
-              Text('-----------------'),
-              Text('Instructor'),
-              Text('Instructor :$instructorsOptions'),
-              Text('Remarks and Restrictions :$instructorremarksandRestrictions'),
-              Text('---------------'),
-              Text('Examiners :'),Text('Examiners :$examiners'),Text('Remarks and Restrictions :$examinarRemarksandRestrictions'),
-               Text('---------------'),
-              Text('Rating certificate endorsement :$ratingcertificateendorsement'),
-              
-              
-              
-              FlatButton(
-                color:Colors.yellow,
-                child: Text('Done'),
-                textColor:Colors.black,
-                onPressed: () {
-                  
-                },
+        padding: new EdgeInsets.all(10.0),
 
-              ),
-            
+        child: ListView(
+          children:[
+            Text('State of issue: $contries'),
+            Text('Licence code : $licenceCodeOptions'),
+            Text('Licence numbe:  $licence_Number'),
+            Text('Title of licence: $titleOfLicenceOptions'),
+            Text('Date of Initial Issue:  $dateOfInitialIssue'),
+            Text('Issued By(Countr code: $countryCodes'),
+           // Text(_dateTime == null ? 'Nothing has been picked yet' : _dateTime.toString()),
+            Text('Date of rating test:  $dateofratingtest'),
+            Text('Date of IR test:  $dateofIRtest'),
+            Text('Valid until  :  $validuntil'),
+            Text('Examiners certificate number : $examinerscertificatenumber'),
+            Text('Class:$classOptions'),
+            Text('Type :$tpyeOptionData'),
+            Text('IR :$ir'),Text('Co-Pilot :$co_Pilot'),
+            Text('--------------------'),
+            Text('Additional Ratings'),
+            Text('Class :$addtiionalratingclassOptions'),
+            Text('Type:$additionalratingtpyeOptionData'),
+            Text('IR :$additionalratingIR'),
+            Text('Co-Pilot :$additionalratingcoPilot'),
+            Text('Remarks and Restrictions :$remarksandRestrictions'),
+            Text('-----------------'),
+            Text('Instructor'),
+            Text('Instructor :$instructorsOptions'),
+            Text('Remarks and Restrictions :$instructorremarksandRestrictions'),
+            Text('---------------'),
+            Text('Examiners :'),Text('Examiners :$examiners'),Text('Remarks and Restrictions :$examinarRemarksandRestrictions'),
+            Text('---------------'),
+            Text('Rating certificate endorsement :$ratingcertificateendorsement'),
 
-            ],
-          ),
+
+
+            FlatButton(
+              color:Colors.yellow,
+              child: Text('Done'),
+              textColor:Colors.black,
+              onPressed: () {
+
+              },
+
+            ),
+
+
+          ],
         ),
-     
+      ),
+
     );
   }
 }
@@ -84,12 +85,13 @@ class MyHomePage extends StatefulWidget {
 bool additionalratingIR=false;
 // stores ExpansionPanel state information
 Color c1 = const Color(0xCFCFCF);
-var dateOfInitialIssue = 'date';
-var dateofIRtest = 'date';
+var dateOfInitialIssue;
+var dateofIRtest;
 String contries;
 String licenceCodeOptions;
 String titleOfLicenceOptions;
 var dateofratingtest;
+
 String licence_Number;
 String countryCodes;
 //ring examinerscertificatenumber;
@@ -99,7 +101,7 @@ bool ir = false;
 bool co_Pilot = false;
 bool additionalratingcoPilot=false;
 String licenceNumber;
-String typeclass;
+String classOptions;
 var additionalLicenceNumber;
 var validuntil;
 var examinerscertificatenumber;
@@ -111,6 +113,7 @@ String ratingcertificateendorsement;
 String addtiionalratingclassOptions;
 String additionalratingtpyeOptionData;
 String instructorremarksandRestrictions;
+DateTime _dateTime;
 class MyItem {
   MyItem({this.isExpanded: false, this.header, this.ir, this.co_Pilot});
 
@@ -119,9 +122,7 @@ class MyItem {
   bool ir = false;
   bool co_Pilot = false;
 }
-expandeddata(){
-  
-}
+
 class _MyHomePage extends State<MyHomePage> {
   List<MyItem> _items = <MyItem>[new MyItem(header: ' Additional Ratings')];
   List<MyItem> _insts = <MyItem>[new MyItem(header: ' Instructors')];
@@ -129,239 +130,243 @@ class _MyHomePage extends State<MyHomePage> {
   List<MyItem> _rating = <MyItem>[
     new MyItem(header: ' Rating certificate endorsement')
   ];
-   List<String> _classoptiondata = 
-    <String>[
-          'SEP (land)',
-          'SEP (sea)',
-          'MEP (land)',
-          'MEP (sea)',
-        
+  List<String> _classoptiondata =
+  <String>[
+    'SEP (land)',
+    'SEP (sea)',
+    'MEP (land)',
+    'MEP (sea)',
+
   ];
   @override
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Licence'),
-      ),
-      body: DefaultTextStyle(
-      style: Theme.of(context).textTheme.bodyText2,
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints viewportConstraints) {
-          return ListView(
- 
-        padding: new EdgeInsets.all(2.0),
-        children: [
-          Container(
-            child: _contries(),
-          ),
-          Container(
-            child: _licenceCodeOptions(),
-          ),
-          Container(
-            child: _licenceNumber(),
-          ),
-          Container(
-            child: _titleOfLicenceOptions(),
-          ),
-          Container(
-            child: _dateOfInitialIssue(),
-          ),
-          Container(
-            child: _countryCodes(),
-          ),
-          Container(
-            child: _dateofratingtest(),
-          ),
-          Container(
-            child: _dateofIRtest(),
-          ),
-          Container(
-            child: _validuntil(),
-          ),
-          Container(
-            child: _examinerscertificatenumber(),
-          ),
-          Container(child: classOptions(),
-          ),
-          Container(
-            child: _tpyeOptionData(),
-          ),
-          Container(
-            child: _ir(),
-          ),
-           Container(
-            child: _coPilot(),
-          ),
-          ExpansionPanelList(
-            expansionCallback: (int index, bool isExpanded) {
-              setState(() {
-                _items[index].isExpanded = !_items[index].isExpanded;
-              });
-            },
-            children: _items.map((MyItem item) {
-              return new ExpansionPanel(
-                headerBuilder: (BuildContext context, bool isExpanded) {
-                  return new Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    alignment: Alignment.centerLeft,
-                    child: Text(item.header),
-                  );
-                },
-                isExpanded: item.isExpanded,
-                body: Container(
-                  height: 200.0,
-                  decoration: new BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: _addtiionalratingclassOptions(),
-                      ),Expanded(child:_additionalratingtpyeOptionData()),
-                       Expanded(
-                        child: _additionalratingIR(),
-                      ),
-                      Expanded(
-                        child: _additionalratingcoPilot(),
-                      ),
-                      Expanded(
-                        child: _remarksandRestrictions(),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-          ExpansionPanelList(
-            expansionCallback: (int index, bool isExpanded) {
-              setState(() {
-           
-                _insts[index].isExpanded = !_insts[index].isExpanded;
-              });
-            },
-            children: _insts.map((MyItem item) {
-              return new ExpansionPanel(
-                headerBuilder: (BuildContext context, bool isExpanded) {
-                  return new Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    alignment: Alignment.centerLeft,
-                    child: Text(item.header),
-                  );
-                },
-                isExpanded: item.isExpanded,
-                body: Container(
-                  height: 100.0,
-                  decoration: new BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: _instructorsOptions(),
-                      ),
-                      Expanded(
-                        child: _instructorremarksandRestrictions(),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-          ExpansionPanelList(
-            expansionCallback: (int index, bool isExpanded) {
-              setState(() {
-                _examiner[index].isExpanded = !_examiner[index].isExpanded;
-              });
-            },
-            children: _examiner.map((MyItem item) {
-              return new ExpansionPanel(
-                headerBuilder: (BuildContext context, bool isExpanded) {
-                  return new Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    alignment: Alignment.centerLeft,
-                    child: Text(item.header),
-                  );
-                },
-                isExpanded: item.isExpanded,
-                body: Container(
-                  height: 100.0,
-                  decoration: new BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: _examiners(),
-                      ),
-                      Expanded(
-                        child: _examinarRemarksandRestrictions(),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-          ExpansionPanelList(
-            expansionCallback: (int index, bool isExpanded) {
-              setState(() {
-                _rating[index].isExpanded = !_rating[index].isExpanded;
-              });
-            },
-            children: _rating.map((MyItem item) {
-              return new ExpansionPanel(
-                headerBuilder: (BuildContext context, bool isExpanded) {
-                  return new Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    alignment: Alignment.centerLeft,
-                    child: Text(item.header),
-                  );
-                },
-                isExpanded: item.isExpanded,
-                body: Container(
-                  height: 60.0,
-                  decoration: new BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: _ratingcertificateendorsement(),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }).toList(),
-          ),  FlatButton(
-                color:Colors.yellow,
-                child: Text('Save'),
-                textColor:Colors.black,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>SecondRoute()),
-                  );
-                },
 
-              ),
-        ],
-      );
-    },
-      ),)
+
+
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Licence'),
+        ),
+        body: DefaultTextStyle(
+          style: Theme.of(context).textTheme.bodyText2,
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints viewportConstraints) {
+              return ListView(
+
+                padding: new EdgeInsets.all(2.0),
+                children: [
+                  Container(
+                    child: _contries(),
+                  ),
+                  Container(
+                    child: _licenceCodeOptions(),
+                  ),
+                  Container(
+                    child: _licenceNumber(),
+                  ),
+                  Container(
+                    child: _titleOfLicenceOptions(),
+                  ),
+                  Container(
+                    child: _dateOfInitialIssue(),
+                  ),
+                  Container(
+                    child: _countryCodes(),
+                  ),
+                  Container(
+                    child: _dateofratingtest(),
+                  ),
+                  Container(
+                    child: _dateofIRtest(),
+                  ),
+                  Container(
+                    child: _validuntil(),
+                  ),
+                  Container(
+                    child: _examinerscertificatenumber(),
+                  ),
+                  Container(child: _classOptions(),
+                  ),
+                  Container(
+                    child: _tpyeOptionData(),
+                  ),
+                  Container(
+                    child: _ir(),
+                  ),
+                  Container(
+                    child: _coPilot(),
+                  ),
+                  ExpansionPanelList(
+                    expansionCallback: (int index, bool isExpanded) {
+                      setState(() {
+                        _items[index].isExpanded = !_items[index].isExpanded;
+                      });
+                    },
+                    children: _items.map((MyItem item) {
+                      return new ExpansionPanel(
+                        headerBuilder: (BuildContext context, bool isExpanded) {
+                          return new Container(
+                            margin: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(10),
+                            alignment: Alignment.centerLeft,
+                            child: Text(item.header),
+                          );
+                        },
+                        isExpanded: item.isExpanded,
+                        body: Container(
+                          height: 260.0,
+                          decoration: new BoxDecoration(
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: _addtiionalratingclassOptions(),
+                              ),Expanded(child:_additionalratingtpyeOptionData()),
+                              Expanded(
+                                child: _additionalratingIR(),
+                              ),
+                              Expanded(
+                                child: _additionalratingcoPilot(),
+                              ),
+                              Expanded(
+                                child: _remarksandRestrictions(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  ExpansionPanelList(
+                    expansionCallback: (int index, bool isExpanded) {
+                      setState(() {
+
+                        _insts[index].isExpanded = !_insts[index].isExpanded;
+                      });
+                    },
+                    children: _insts.map((MyItem item) {
+                      return new ExpansionPanel(
+                        headerBuilder: (BuildContext context, bool isExpanded) {
+                          return new Container(
+                            margin: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(10),
+                            alignment: Alignment.centerLeft,
+                            child: Text(item.header),
+                          );
+                        },
+                        isExpanded: item.isExpanded,
+                        body: Container(
+                          height:150.0,
+                          decoration: new BoxDecoration(
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: _instructorsOptions(),
+                              ),
+                              Expanded(
+                                child: _instructorremarksandRestrictions(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  ExpansionPanelList(
+                    expansionCallback: (int index, bool isExpanded) {
+                      setState(() {
+                        _examiner[index].isExpanded = !_examiner[index].isExpanded;
+                      });
+                    },
+                    children: _examiner.map((MyItem item) {
+                      return new ExpansionPanel(
+                        headerBuilder: (BuildContext context, bool isExpanded) {
+                          return new Container(
+                            margin: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(10),
+                            alignment: Alignment.centerLeft,
+                            child: Text(item.header),
+                          );
+                        },
+                        isExpanded: item.isExpanded,
+                        body: Container(
+                          height: 160.0,
+                          decoration: new BoxDecoration(
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: _examiners(),
+                              ),
+                              Expanded(
+                                child: _examinarRemarksandRestrictions(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  ExpansionPanelList(
+                    expansionCallback: (int index, bool isExpanded) {
+                      setState(() {
+                        _rating[index].isExpanded = !_rating[index].isExpanded;
+                      });
+                    },
+                    children: _rating.map((MyItem item) {
+                      return new ExpansionPanel(
+                        headerBuilder: (BuildContext context, bool isExpanded) {
+                          return new Container(
+                            margin: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(10),
+                            alignment: Alignment.centerLeft,
+                            child: Text(item.header),
+                          );
+                        },
+                        isExpanded: item.isExpanded,
+                        body: Container(
+                          height: 60.0,
+                          decoration: new BoxDecoration(
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: _ratingcertificateendorsement(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),  FlatButton(
+                    color:Colors.yellow,
+                    child: Text('Save'),
+                    textColor:Colors.black,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>SecondRoute()),
+                      );
+                    },
+
+                  ),
+                ],
+              );
+            },
+          ),)
     );
   }
 
- Widget _ratingcertificateendorsement() {
+  Widget _ratingcertificateendorsement() {
     return ListTile(
-   
+
       leading: Text('Rating :'),
       title: DropdownButton<String>(
         hint: Text('Rating certificate endorsementr:'),
@@ -377,7 +382,7 @@ class _MyHomePage extends State<MyHomePage> {
         },
         items:ratingCertificateEndorsementOptions.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
-            
+            value: value,
             child: Text(value),
           );
         }).toList(),
@@ -385,12 +390,12 @@ class _MyHomePage extends State<MyHomePage> {
       ),
     );
   }
-  Widget classOptions() {
+  Widget _classOptions() {
     return ListTile(
       trailing: Icon(Icons.delete),
       leading: Text('Class'),
       title: DropdownButton<String>(
-        hint: Text('Type'),
+        hint: Text('Class Type'),
         icon: Icon(IconData(58131, fontFamily: 'MaterialIcons')),
         iconSize: 24,
         elevation: 16,
@@ -401,7 +406,7 @@ class _MyHomePage extends State<MyHomePage> {
         ),
         onChanged: (String newValue) {
           setState(() {
-            typeclass = newValue;
+            classOptions = newValue;
           });
         },
         items:_classoptiondata.map<DropdownMenuItem<String>>((String value) {
@@ -410,7 +415,7 @@ class _MyHomePage extends State<MyHomePage> {
             child: Text(value),
           );
         }).toList(),
-        value: typeclass,
+        value: classOptions,
       ),
     );
   }
@@ -419,7 +424,7 @@ class _MyHomePage extends State<MyHomePage> {
       trailing: Icon(Icons.delete),
       leading: Text('Class'),
       title: DropdownButton<String>(
-        hint: Text('Type'),
+        hint: Text('Options'),
         icon: Icon(IconData(58131, fontFamily: 'MaterialIcons')),
         iconSize: 24,
         elevation: 16,
@@ -444,61 +449,61 @@ class _MyHomePage extends State<MyHomePage> {
     );
   }
 
-  
+
 
   Widget _ir() {
     return ListTile(
-              leading: Checkbox(
-                //checkColor :Colors.deepPurpleAccent,
-                hoverColor: Colors.deepPurpleAccent,
-                value: ir,
-                onChanged: (bool newValue) {
-                  setState(() { ir = newValue;});
-                },
-              ),
-              title: Text('IR'),
-            );}
-   Widget _additionalratingIR() {
+      leading: Checkbox(
+        //checkColor :Colors.deepPurpleAccent,
+        hoverColor: Colors.deepPurpleAccent,
+        value: ir,
+        onChanged: (bool newValue) {
+          setState(() { ir = newValue;});
+        },
+      ),
+      title: Text('IR'),
+    );}
+  Widget _additionalratingIR() {
     return ListTile(
-              leading: Checkbox(
-                //checkColor :Colors.deepPurpleAccent,
-                hoverColor: Colors.deepPurpleAccent,
-                value: additionalratingIR,
-                onChanged: (bool newValue) {
-                  setState(() { additionalratingIR = newValue;});
-                },
-              ),
-              title: Text('IR'),
-            );}
-      Widget _coPilot(){
-        return ListTile(
-                  leading: Checkbox(
-                    //checkColor :Colors.deepPurpleAccent,
-                    hoverColor: Colors.deepPurpleAccent,
-                    value: co_Pilot,
-                    onChanged: (bool newValue) {
-                      setState(() {
-                        co_Pilot = newValue;
-                      });
-                    },
-                  ),
-                  title: Text('Co_Pilot'),
-                );
+      leading: Checkbox(
+        //checkColor :Colors.deepPurpleAccent,
+        hoverColor: Colors.deepPurpleAccent,
+        value: additionalratingIR,
+        onChanged: (bool newValue) {
+          setState(() { additionalratingIR = newValue;});
+        },
+      ),
+      title: Text('IR'),
+    );}
+  Widget _coPilot(){
+    return ListTile(
+      leading: Checkbox(
+        //checkColor :Colors.deepPurpleAccent,
+        hoverColor: Colors.deepPurpleAccent,
+        value: co_Pilot,
+        onChanged: (bool newValue) {
+          setState(() {
+            co_Pilot = newValue;
+          });
+        },
+      ),
+      title: Text('Co_Pilot'),
+    );
   }
- Widget _additionalratingcoPilot(){
-        return ListTile(
-                  leading: Checkbox(
-                    //checkColor :Colors.deepPurpleAccent,
-                    hoverColor: Colors.deepPurpleAccent,
-                    value: additionalratingcoPilot,
-                    onChanged: (bool newValue) {
-                      setState(() {
-                        additionalratingcoPilot = newValue;
-                      });
-                    },
-                  ),
-                  title: Text('Co_Pilot'),
-                );
+  Widget _additionalratingcoPilot(){
+    return ListTile(
+      leading: Checkbox(
+        //checkColor :Colors.deepPurpleAccent,
+        hoverColor: Colors.deepPurpleAccent,
+        value: additionalratingcoPilot,
+        onChanged: (bool newValue) {
+          setState(() {
+            additionalratingcoPilot = newValue;
+          });
+        },
+      ),
+      title: Text('Co_Pilot'),
+    );
   }
 
   Widget _examiners() {
@@ -506,7 +511,7 @@ class _MyHomePage extends State<MyHomePage> {
       trailing: Icon(Icons.delete),
       leading: Text('Examiners'),
       title: DropdownButton<String>(
-        hint: Text('Type'),
+        hint: Text('Options'),
         icon: Icon(IconData(58131, fontFamily: 'MaterialIcons')),
         iconSize: 24,
         elevation: 16,
@@ -538,7 +543,7 @@ class _MyHomePage extends State<MyHomePage> {
 
   Widget additionalLicenceNumberdata() {
     return ListTile(
-        autofocus: true,
+        //autofocus: true,
         leading: Text('Licence number  :'),
         title: TextField(
           decoration: InputDecoration(hintText: 'Licence number:'),
@@ -552,7 +557,7 @@ class _MyHomePage extends State<MyHomePage> {
 
   Widget _remarksandRestrictions() {
     return ListTile(
-        autofocus: true,
+        //autofocus: true,
         leading: Text('Remarks and\n Restrictions :'),
         title: TextField(
           decoration: InputDecoration(hintText: 'Remarks and Restrictions:'),
@@ -563,9 +568,9 @@ class _MyHomePage extends State<MyHomePage> {
           },
         ));
   }
- Widget _instructorremarksandRestrictions() {
+  Widget _instructorremarksandRestrictions() {
     return ListTile(
-        autofocus: true,
+       // autofocus: true,
         leading: Text('Remarks and \nRestrictions :'),
         title: TextField(
           decoration: InputDecoration(hintText: 'Remarks and Restrictions:'),
@@ -579,7 +584,7 @@ class _MyHomePage extends State<MyHomePage> {
 
   Widget _contries() {
     return ListTile(
-        autofocus: true,
+        //autofocus: true,
         leading: Text('State of issue  :'),
         title: DropdownButton<String>(
           hint: Text('State '),
@@ -597,7 +602,7 @@ class _MyHomePage extends State<MyHomePage> {
             });
           },
           items: <String>[
-           'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Congo, Democratic Republic', 'Costa Rica', 'Cote d\'Ivoire', 'Croatia', 'Cuba', 'Cyprus', 'Czechia', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini (formerly Swaziland)', 'Ethiopia', 'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Korea', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Korea', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States of America', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe',
+            'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Congo, Democratic Republic', 'Costa Rica', 'Cote d\'Ivoire', 'Croatia', 'Cuba', 'Cyprus', 'Czechia', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini (formerly Swaziland)', 'Ethiopia', 'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Korea', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Korea', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States of America', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe',
           ].map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
@@ -610,7 +615,7 @@ class _MyHomePage extends State<MyHomePage> {
 
   Widget _licenceCodeOptions() {
     return ListTile(
-      autofocus: true,
+      //autofocus: true,
       leading: Text('LicenceCode  :'),
       title: DropdownButton<String>(
         hint: Text('licence code'),
@@ -628,7 +633,7 @@ class _MyHomePage extends State<MyHomePage> {
           });
         },
         items: <String>[
-         'AD.FCL.','AE.FCL.','AF.FCL.','AG.FCL.','AI.FCL.','AL.FCL.',
+          'AD.FCL.','AE.FCL.','AF.FCL.','AG.FCL.','AI.FCL.','AL.FCL.',
           'AM.FCL.','AO.FCL.','AQ.FCL.','AR.FCL.','AS.FCL.','AT.FCL.',
           'AU.FCL.','AW.FCL.','AX.FCL.','AZ.FCL.','BA.FCL.','BB.FCL.',
           'BD.FCL.','BE.FCL.','BF.FCL.','BG.FCL.','BH.FCL.','BI.FCL.',
@@ -657,11 +662,11 @@ class _MyHomePage extends State<MyHomePage> {
           'MX.FCL.','MY.FCL.','MZ.FCL.','NA.FCL.','NC.FCL.','NE.FCL.',
           'NF.FCL.','NG.FCL.','NI.FCL.','NL.FCL.','NO.FCL.','NP.FCL.',
           'NR.FCL.','NU.FCL.','NZ.FCL.','OM.FCL.','PA.FCL.','PE.FCL.',
-          
-          
+
+
           'PF.FCL.','PG.FCL.','PH.FCL.','PK.FCL.','PL.FCL.','PM.FCL.',
           'PN.FCL.','PR.FCL.','PS.FCL.','PT.FCL.','PW.FCL.','PY.FCL.',
-          
+
           'QA.FCL.','RE.FCL.','RO.FCL.','RS.FCL.','RU.FCL.','RW.FCL.',
           'SA.FCL.','SB.FCL.','SC.FCL.','SD.FCL.','SE.FCL.','SG.FCL.',
           'SH.FCL.','SI.FCL.','SJ.FCL.','SK.FCL.','SL.FCL.','SM.FCL.',
@@ -686,7 +691,7 @@ class _MyHomePage extends State<MyHomePage> {
 
   Widget _examinarRemarksandRestrictions() {
     return ListTile(
-        autofocus: true,
+        //autofocus: true,
         leading: Icon(IconData(59702, fontFamily: 'MaterialIcons')),
         title: TextField(
           decoration: InputDecoration(hintText: 'Remarks and Restrictions:'),
@@ -700,7 +705,7 @@ class _MyHomePage extends State<MyHomePage> {
 
   Widget _licenceNumber() {
     return ListTile(
-        autofocus: true,
+        //autofocus: true,
         leading: Text('Licence number  :'),
         title: TextField(
           decoration: InputDecoration(hintText: 'Licence number:'),
@@ -714,7 +719,7 @@ class _MyHomePage extends State<MyHomePage> {
 
   Widget _examinerscertificatenumber() {
     return ListTile(
-        autofocus: true,
+        //autofocus: true,
         leading: Text('Examiners certificate number :'),
         title: TextField(
           decoration: InputDecoration(hintText: 'Licence number:'),
@@ -774,15 +779,27 @@ class _MyHomePage extends State<MyHomePage> {
   Widget _dateOfInitialIssue() {
     return ListTile(
       leading: Text('Date of initial issue : '),
+
       title: Container(
         child: Row(
           children: [
-            Expanded(child: Text('$dateOfInitialIssue')),
+            Expanded(child:  Text(dateOfInitialIssue == null ? 'Pick' :dateOfInitialIssue.toString()),),
             IconButton(
+
               icon: Icon(IconData(59701, fontFamily: 'MaterialIcons')),
               color: Colors.deepPurple,
               onPressed: () {
-                showAlertDialog(context);
+                showDatePicker(
+
+                    context: context,
+                    initialDate: _dateTime == null ? DateTime.now() : _dateTime,
+                    firstDate: DateTime(1950),
+                    lastDate: DateTime(2200)
+                ).then((date) {
+                  setState(() {
+                    dateOfInitialIssue = date;
+                  });
+                });
               },
             ),
           ],
@@ -797,13 +814,23 @@ class _MyHomePage extends State<MyHomePage> {
       title: Container(
         child: Row(
           children: [
-            Expanded(child: Text('$dateofratingtest')),
+            Expanded(child:    Text(dateofratingtest == null ? 'pick' : dateofratingtest.toString()),),
             IconButton(
               icon: Icon(IconData(59701, fontFamily: 'MaterialIcons')),
               color: Colors.deepPurple,
               onPressed: () {
-                showAlertDialog(context);
-              },
+
+                showDatePicker(
+
+                    context: context,
+                    initialDate: _dateTime == null ? DateTime.now() : _dateTime,
+                    firstDate: DateTime(1950),
+                    lastDate: DateTime(2200)
+                ).then((date) {
+                  setState(() {
+                    dateofratingtest = date;
+                  });
+                });              },
             ),
           ],
         ),
@@ -817,12 +844,22 @@ class _MyHomePage extends State<MyHomePage> {
       title: Container(
         child: Row(
           children: [
-            Expanded(child: Text('$dateofIRtest')),
+            Expanded(child:  Text(dateofIRtest == null ? 'Pick' : dateofIRtest.toString()),),
             IconButton(
               icon: Icon(IconData(59701, fontFamily: 'MaterialIcons')),
               color: Colors.deepPurple,
               onPressed: () {
-                showAlertDialog(context);
+                showDatePicker(
+
+                    context: context,
+                    initialDate: _dateTime == null ? DateTime.now() : _dateTime,
+                    firstDate: DateTime(1950),
+                    lastDate: DateTime(2200)
+                ).then((date) {
+                  setState(() {
+                    dateofIRtest = date;
+                  });
+                });
               },
             ),
           ],
@@ -837,12 +874,23 @@ class _MyHomePage extends State<MyHomePage> {
       title: Container(
         child: Row(
           children: [
-            Expanded(child: Text('$validuntil')),
+            Expanded(child:  Text(validuntil == null ? 'Pick' : validuntil.toString()),),
             IconButton(
               icon: Icon(IconData(59701, fontFamily: 'MaterialIcons')),
               color: Colors.deepPurple,
               onPressed: () {
-                showAlertDialog(context);
+
+                showDatePicker(
+
+                    context: context,
+                    initialDate: _dateTime == null ? DateTime.now() : _dateTime,
+                    firstDate: DateTime(1950),
+                    lastDate: DateTime(2200)
+                ).then((date) {
+                  setState(() {
+                    validuntil = date;
+                  });
+                });
               },
             ),
           ],
@@ -1135,7 +1183,7 @@ class _MyHomePage extends State<MyHomePage> {
     return ListTile(
       leading: Text('Type'),
       title: DropdownButton<String>(
-        hint: Text('Type'),
+        hint: Text('Option'),
         icon: Icon(IconData(58131, fontFamily: 'MaterialIcons')),
         iconSize: 24,
         elevation: 16,
@@ -1240,15 +1288,15 @@ class _MyHomePage extends State<MyHomePage> {
       ),
     );
   }
-  List<String> ratingCertificateEndorsementOptions = 
-    <String>[ 'SEP (land)', 'SEP (sea)', 'MEP (land)', 'MEP (sea)', 'TMG', 'SET', 'S760', 'SN601', 'SE210/10B3/11/12', 'ND25', 'ND16', 'ND26', 'SuperGuppy', 'Aero Vodochody SET', 'A300', 'A300FFCC', 'A310/300‐600', 'A300‐600ST', 'A320', 'A330/350', 'A340', 'A380', 'A400M', 'AT‐4/5/6/8 SET', 'C27J', 'AN26', 'AstaMET', 'ATR42/72', 'HS748', 'Jetstream 41', 'RA390', 'BER2E', 'B707/720', 'B717', 'B727', 'B737 100‐200', 'B737 300‐900', 'B747 100‐300', 'B747‐400', 'B757/767', 'B777/787', 'CL215', 'CL215T', 'CL415', 'CL600/601', 'CL604/605', 'CL65', 'CL30', 'BD‐500', 'BD‐700', 'DHC8', 'Bae/ATP/Jetstream 61', 'AVRORJ/Bae146', 'BAC1‐11', 'C212', 'C295', 'CN235', 'Cessna SET', 'C501/551', 'C510', 'C525', 'C560XL/XLS', 'C500/550/560', 'C650', 'C680', 'C750', 'C406/425', 'C441', 'SF50', 'CV240/340/440', 'CV580', 'Falcon 10/100', 'Falcon 20/200', 'Falcon900EX EASy', 'Falcon2000/2000EX', 'Falcon2000EX EASy', 'Falcon 7X', 'Falcon50/900', 'DHC3 SET', 'DHC2 SET', 'DHC7', 'D128', 'D28‐G92', 'DO 328‐100', 'DO 328‐300', 'TBM SET', 'EA500', 'EMB110', 'EMB 120', 'EMB 135/145', 'EMB 500/505', 'EMB 550', 'EMB170', 'F27', 'F 28', 'F 50', 'F70/100', 'G 120TP SET', 'G520 SET', 'S2FT', 'GulfstreamI', 'GulfstreamII/III', 'Gulfstream SET', 'GIV', 'G‐V', 'GVI', 'G150', 'G200', 'G280', 'Herald', 'HA4T', 'HS125', 'BE90/99/100/200', 'BE36TC SET', 'BE300/1900', 'Beech400/MU300', 'Jetstream31/32', 'SAETA', 'HA‐420', 'IAI1121/23/24', 'IAI1125', 'JU52', 'Learjet20/30', 'Learjet45/75', 'Learjet55', 'Learjet60', 'LetL410', 'L188 Electra', 'Hercules', 'L1011', 'Jetstar', 'L1049', 'HFB320', 'VFW‐614', 'DCA26', 'DC3', 'DC4', 'DC6', 'DC7', 'DC8', 'DC9 10‐50', 'DC9 80/MD88/ MD90', 'DC 10', 'MD 11', 'MU2B', 'PAC750XL SET', 'Piaggio 166', 'Piaggio 180', 'BN2T', 'Pilatus PC6 SET', 'Pilatus PC7 SET', 'PC9/PC7MkII', 'Pilatus PC12 SET', 'PA31T/42', 'PA‐46 SET', 'IPTNCN 235', 'PZL‐M28', 'SET Kodiak 100', 'Rhein Flugzeugbau SET', 'Rockwell MET', 'NA265', 'D228', 'SAAB340', 'SAAB2000', 'SC7Skyvan', 'SD3‐30/60', 'Belfast', 'SEP (land)', 'Extra500 SET', 'RRJ95', 'SA226/227', 'Snow/Ayres SET', 'DHC6', 'Vanguard', 'Viscount', 'AP68TP‐600', 'AP68TP‐300', 'SF600', 'SF600A', 'A119', 'A109', 'A139', 'AW109', 'AW169', 'AW189', 'SK‐61', 'SA341/342', 'SA318/SE313', 'SA316/319/315', 'SA360', 'SO 1221', 'EC120B', 'AS 350 / EC130', 'SA 330', 'AS 332 / EC 225', 'EC175', 'AS355', 'SA365 C', 'S365 / EC155', 'BO 105', 'BK117', 'EC145 (BK117)', 'EC135/635', 'Bell 47', 'Bell 47 T', 'Bell 204/205/UH‐1D', 'Bell 206', 'Bell 407', 'Bell 214', 'Bell 206 LT', 'Bell 212/412', 'Bell 214 ST', 'Bell 222/230/430', 'Bell 427', 'Bell 429', 'BV 234', 'Brantley B2', 'HU 269', 'HU 369/ MD500N / 600N', 'Bristol 171 B', 'EH101', 'ENF 28', 'ENF 480', 'S 64 F', 'Cabri G2', 'UH 12', 'UH 12 T', 'HU 269', 'SC 330', 'K 1200', 'HU369 / MD500N / 600N', 'MD 900 / 902', 'KA 26 D', 'KA 32', 'Mi 8', 'SW‐4', 'Mi 2', 'KANIA', 'W‐3 SOKOL', 'R 22', 'R 44', 'R 66', 'S 55', 'S 58', 'SK 76', 'S76', 'SK 61', 'SK 92', 'SV 4', 'Bell 47', 'WHS 55', ];
-  List<String> typedata = 
-    <String>['TMG', 'SET', 'S760', 'SN601', 'SE210/10B3/11/12', 'ND25', 'ND16', 'ND26', 'SuperGuppy', 'Aero Vodochody SET', 'A300', 'A300FFCC', 'A310/300‐600', 'A300‐600ST', 'A320', 'A330/350', 'A340', 'A380', 'A400M', 'AT‐4/5/6/8 SET', 'C27J', 'AN26', 'AstaMET', 'ATR42/72', 'HS748', 'Jetstream 41', 'RA390', 'BER2E', 'B707/720', 'B717', 'B727', 'B737 100‐200', 'B737 300‐900', 'B747 100‐300', 'B747‐400', 'B757/767', 'B777/787', 'CL215', 'CL215T', 'CL415', 'CL600/601', 'CL604/605', 'CL65', 'CL30', 'BD‐500', 'BD‐700', 'DHC8', 'Bae/ATP/Jetstream 61', 'AVRORJ/Bae146', 'BAC1‐11', 'C212', 'C295', 'CN235', 'Cessna SET', 'C501/551', 'C510', 'C525', 'C560XL/XLS', 'C500/550/560', 'C650', 'C680', 'C750', 'C406/425', 'C441', 'SF50', 'CV240/340/440', 'CV580', 'Falcon 10/100', 'Falcon 20/200', 'Falcon900EX EASy', 'Falcon2000/2000EX', 'Falcon2000EX EASy', 'Falcon 7X', 'Falcon50/900', 'DHC3 SET', 'DHC2 SET', 'DHC7', 'D128', 'D28‐G92', 'DO 328‐100', 'DO 328‐300', 'TBM SET', 'EA500', 'EMB110', 'EMB 120', 'EMB 135/145', 'EMB 500/505', 'EMB 550', 'EMB170', 'F27', 'F 28', 'F 50', 'F70/100', 'G 120TP SET', 'G520 SET', 'S2FT', 'GulfstreamI', 'GulfstreamII/III', 'Gulfstream SET', 'GIV', 'G‐V', 'GVI', 'G150', 'G200', 'G280', 'Herald', 'HA4T', 'HS125', 'BE90/99/100/200', 'BE36TC SET', 'BE300/1900', 'Beech400/MU300', 'Jetstream31/32', 'SAETA', 'HA‐420', 'IAI1121/23/24', 'IAI1125', 'JU52', 'Learjet20/30', 'Learjet45/75', 'Learjet55', 'Learjet60', 'LetL410', 'L188 Electra', 'Hercules', 'L1011', 'Jetstar', 'L1049', 'HFB320', 'VFW‐614', 'DCA26', 'DC3', 'DC4', 'DC6', 'DC7', 'DC8', 'DC9 10‐50', 'DC9 80/MD88/ MD90', 'DC 10', 'MD 11', 'MU2B', 'PAC750XL SET', 'Piaggio 166', 'Piaggio 180', 'BN2T', 'Pilatus PC6 SET', 'Pilatus PC7 SET', 'PC9/PC7MkII', 'Pilatus PC12 SET', 'PA31T/42', 'PA‐46 SET', 'IPTNCN 235', 'PZL‐M28', 'SET Kodiak 100', 'Rhein Flugzeugbau SET', 'Rockwell MET', 'NA265', 'D228', 'SAAB340', 'SAAB2000', 'SC7Skyvan', 'SD3‐30/60', 'Belfast', 'SEP (land)', 'Extra500 SET', 'RRJ95', 'SA226/227', 'Snow/Ayres SET', 'DHC6', 'Vanguard', 'Viscount', 'AP68TP‐600', 'AP68TP‐300', 'SF600', 'SF600A', 'A119', 'A109', 'A139', 'AW109', 'AW169', 'AW189', 'SK‐61', 'SA341/342', 'SA318/SE313', 'SA316/319/315', 'SA360', 'SO 1221', 'EC120B', 'AS 350 / EC130', 'SA 330', 'AS 332 / EC 225', 'EC175', 'AS355', 'SA365 C', 'S365 / EC155', 'BO 105', 'BK117', 'EC145 (BK117)', 'EC135/635', 'Bell 47', 'Bell 47 T', 'Bell 204/205/UH‐1D', 'Bell 206', 'Bell 407', 'Bell 214', 'Bell 206 LT', 'Bell 212/412', 'Bell 214 ST', 'Bell 222/230/430', 'Bell 427', 'Bell 429', 'BV 234', 'Brantley B2', 'HU 269', 'HU 369/ MD500N / 600N', 'Bristol 171 B', 'EH101', 'ENF 28', 'ENF 480', 'S 64 F', 'Cabri G2', 'UH 12', 'UH 12 T', 'HU 269', 'SC 330', 'K 1200', 'HU369 / MD500N / 600N', 'MD 900 / 902', 'KA 26 D', 'KA 32', 'Mi 8', 'SW‐4', 'Mi 2', 'KANIA', 'W‐3 SOKOL', 'R 22', 'R 44', 'R 66', 'S 55', 'S 58', 'SK 76', 'S76', 'SK 61', 'SK 92', 'SV 4', 'Bell 47', 'WHS 55'
+  List<String> ratingCertificateEndorsementOptions =
+  <String>[ 'SEP (land)', 'SEP (sea)', 'MEP (land)', 'MEP (sea)', 'TMG', 'SET', 'S760', 'SN601', 'SE210/10B3/11/12', 'ND25', 'ND16', 'ND26', 'SuperGuppy', 'Aero Vodochody SET', 'A300', 'A300FFCC', 'A310/300‐600', 'A300‐600ST', 'A320', 'A330/350', 'A340', 'A380', 'A400M', 'AT‐4/5/6/8 SET', 'C27J', 'AN26', 'AstaMET', 'ATR42/72', 'HS748', 'Jetstream 41', 'RA390', 'BER2E', 'B707/720', 'B717', 'B727', 'B737 100‐200', 'B737 300‐900', 'B747 100‐300', 'B747‐400', 'B757/767', 'B777/787', 'CL215', 'CL215T', 'CL415', 'CL600/601', 'CL604/605', 'CL65', 'CL30', 'BD‐500', 'BD‐700', 'DHC8', 'Bae/ATP/Jetstream 61', 'AVRORJ/Bae146', 'BAC1‐11', 'C212', 'C295', 'CN235', 'Cessna SET', 'C501/551', 'C510', 'C525', 'C560XL/XLS', 'C500/550/560', 'C650', 'C680', 'C750', 'C406/425', 'C441', 'SF50', 'CV240/340/440', 'CV580', 'Falcon 10/100', 'Falcon 20/200', 'Falcon900EX EASy', 'Falcon2000/2000EX', 'Falcon2000EX EASy', 'Falcon 7X', 'Falcon50/900', 'DHC3 SET', 'DHC2 SET', 'DHC7', 'D128', 'D28‐G92', 'DO 328‐100', 'DO 328‐300', 'TBM SET', 'EA500', 'EMB110', 'EMB 120', 'EMB 135/145', 'EMB 500/505', 'EMB 550', 'EMB170', 'F27', 'F 28', 'F 50', 'F70/100', 'G 120TP SET', 'G520 SET', 'S2FT', 'GulfstreamI', 'GulfstreamII/III', 'Gulfstream SET', 'GIV', 'G‐V', 'GVI', 'G150', 'G200', 'G280', 'Herald', 'HA4T', 'HS125', 'BE90/99/100/200', 'BE36TC SET', 'BE300/1900', 'Beech400/MU300', 'Jetstream31/32', 'SAETA', 'HA‐420', 'IAI1121/23/24', 'IAI1125', 'JU52', 'Learjet20/30', 'Learjet45/75', 'Learjet55', 'Learjet60', 'LetL410', 'L188 Electra', 'Hercules', 'L1011', 'Jetstar', 'L1049', 'HFB320', 'VFW‐614', 'DCA26', 'DC3', 'DC4', 'DC6', 'DC7', 'DC8', 'DC9 10‐50', 'DC9 80/MD88/ MD90', 'DC 10', 'MD 11', 'MU2B', 'PAC750XL SET', 'Piaggio 166', 'Piaggio 180', 'BN2T', 'Pilatus PC6 SET', 'Pilatus PC7 SET', 'PC9/PC7MkII', 'Pilatus PC12 SET', 'PA31T/42', 'PA‐46 SET', 'IPTNCN 235', 'PZL‐M28', 'SET Kodiak 100', 'Rhein Flugzeugbau SET', 'Rockwell MET', 'NA265', 'D228', 'SAAB340', 'SAAB2000', 'SC7Skyvan', 'SD3‐30/60', 'Belfast', 'SEP (land)', 'Extra500 SET', 'RRJ95', 'SA226/227', 'Snow/Ayres SET', 'DHC6', 'Vanguard', 'Viscount', 'AP68TP‐600', 'AP68TP‐300', 'SF600', 'SF600A', 'A119', 'A109', 'A139', 'AW109', 'AW169', 'AW189', 'SK‐61', 'SA341/342', 'SA318/SE313', 'SA316/319/315', 'SA360', 'SO 1221', 'EC120B', 'AS 350 / EC130', 'SA 330', 'AS 332 / EC 225', 'EC175', 'AS355', 'SA365 C', 'S365 / EC155', 'BO 105', 'BK117', 'EC145 (BK117)', 'EC135/635', 'Bell 47', 'Bell 47 T', 'Bell 204/205/UH‐1D', 'Bell 206', 'Bell 407', 'Bell 214', 'Bell 206 LT', 'Bell 212/412', 'Bell 214 ST', 'Bell 222/230/430', 'Bell 427', 'Bell 429', 'BV 234', 'Brantley B2', 'HU 269', 'HU 369/ MD500N / 600N', 'Bristol 171 B', 'EH101', 'ENF 28', 'ENF 480', 'S 64 F', 'Cabri G2', 'UH 12', 'UH 12 T', 'HU 269', 'SC 330', 'K 1200', 'HU369 / MD500N / 600N', 'MD 900 / 902', 'KA 26 D', 'KA 32', 'Mi 8', 'SW‐4', 'Mi 2', 'KANIA', 'W‐3 SOKOL', 'R 22', 'R 44', 'R 66', 'S 55', 'S 58', 'SK 76', 'S76', 'SK 61', 'SK 92', 'SV 4', 'Bell 47', 'WHS 55', ];
+  List<String> typedata =
+  <String>['TMG', 'SET', 'S760', 'SN601', 'SE210/10B3/11/12', 'ND25', 'ND16', 'ND26', 'SuperGuppy', 'Aero Vodochody SET', 'A300', 'A300FFCC', 'A310/300‐600', 'A300‐600ST', 'A320', 'A330/350', 'A340', 'A380', 'A400M', 'AT‐4/5/6/8 SET', 'C27J', 'AN26', 'AstaMET', 'ATR42/72', 'HS748', 'Jetstream 41', 'RA390', 'BER2E', 'B707/720', 'B717', 'B727', 'B737 100‐200', 'B737 300‐900', 'B747 100‐300', 'B747‐400', 'B757/767', 'B777/787', 'CL215', 'CL215T', 'CL415', 'CL600/601', 'CL604/605', 'CL65', 'CL30', 'BD‐500', 'BD‐700', 'DHC8', 'Bae/ATP/Jetstream 61', 'AVRORJ/Bae146', 'BAC1‐11', 'C212', 'C295', 'CN235', 'Cessna SET', 'C501/551', 'C510', 'C525', 'C560XL/XLS', 'C500/550/560', 'C650', 'C680', 'C750', 'C406/425', 'C441', 'SF50', 'CV240/340/440', 'CV580', 'Falcon 10/100', 'Falcon 20/200', 'Falcon900EX EASy', 'Falcon2000/2000EX', 'Falcon2000EX EASy', 'Falcon 7X', 'Falcon50/900', 'DHC3 SET', 'DHC2 SET', 'DHC7', 'D128', 'D28‐G92', 'DO 328‐100', 'DO 328‐300', 'TBM SET', 'EA500', 'EMB110', 'EMB 120', 'EMB 135/145', 'EMB 500/505', 'EMB 550', 'EMB170', 'F27', 'F 28', 'F 50', 'F70/100', 'G 120TP SET', 'G520 SET', 'S2FT', 'GulfstreamI', 'GulfstreamII/III', 'Gulfstream SET', 'GIV', 'G‐V', 'GVI', 'G150', 'G200', 'G280', 'Herald', 'HA4T', 'HS125', 'BE90/99/100/200', 'BE36TC SET', 'BE300/1900', 'Beech400/MU300', 'Jetstream31/32', 'SAETA', 'HA‐420', 'IAI1121/23/24', 'IAI1125', 'JU52', 'Learjet20/30', 'Learjet45/75', 'Learjet55', 'Learjet60', 'LetL410', 'L188 Electra', 'Hercules', 'L1011', 'Jetstar', 'L1049', 'HFB320', 'VFW‐614', 'DCA26', 'DC3', 'DC4', 'DC6', 'DC7', 'DC8', 'DC9 10‐50', 'DC9 80/MD88/ MD90', 'DC 10', 'MD 11', 'MU2B', 'PAC750XL SET', 'Piaggio 166', 'Piaggio 180', 'BN2T', 'Pilatus PC6 SET', 'Pilatus PC7 SET', 'PC9/PC7MkII', 'Pilatus PC12 SET', 'PA31T/42', 'PA‐46 SET', 'IPTNCN 235', 'PZL‐M28', 'SET Kodiak 100', 'Rhein Flugzeugbau SET', 'Rockwell MET', 'NA265', 'D228', 'SAAB340', 'SAAB2000', 'SC7Skyvan', 'SD3‐30/60', 'Belfast', 'SEP (land)', 'Extra500 SET', 'RRJ95', 'SA226/227', 'Snow/Ayres SET', 'DHC6', 'Vanguard', 'Viscount', 'AP68TP‐600', 'AP68TP‐300', 'SF600', 'SF600A', 'A119', 'A109', 'A139', 'AW109', 'AW169', 'AW189', 'SK‐61', 'SA341/342', 'SA318/SE313', 'SA316/319/315', 'SA360', 'SO 1221', 'EC120B', 'AS 350 / EC130', 'SA 330', 'AS 332 / EC 225', 'EC175', 'AS355', 'SA365 C', 'S365 / EC155', 'BO 105', 'BK117', 'EC145 (BK117)', 'EC135/635', 'Bell 47', 'Bell 47 T', 'Bell 204/205/UH‐1D', 'Bell 206', 'Bell 407', 'Bell 214', 'Bell 206 LT', 'Bell 212/412', 'Bell 214 ST', 'Bell 222/230/430', 'Bell 427', 'Bell 429', 'BV 234', 'Brantley B2', 'HU 269', 'HU 369/ MD500N / 600N', 'Bristol 171 B', 'EH101', 'ENF 28', 'ENF 480', 'S 64 F', 'Cabri G2', 'UH 12', 'UH 12 T', 'HU 269', 'SC 330', 'K 1200', 'HU369 / MD500N / 600N', 'MD 900 / 902', 'KA 26 D', 'KA 32', 'Mi 8', 'SW‐4', 'Mi 2', 'KANIA', 'W‐3 SOKOL', 'R 22', 'R 44', 'R 66', 'S 55', 'S 58', 'SK 76', 'S76', 'SK 61', 'SK 92', 'SV 4', 'Bell 47', 'WHS 55'
   ];
-  
-  
-  
-  
+
+
+
+
 }
 
 showAlertDialog(BuildContext context) {
